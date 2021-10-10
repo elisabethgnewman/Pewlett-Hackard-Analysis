@@ -23,4 +23,15 @@ LEFT JOIN unique_titles as de
 ON rt.emp_no = de.emp_no
 GROUP BY de.title;
 
+-- Find employees who are eligible for mentorship (1965 bday)
+SELECT e.emp_no, e.first_name, e.last_name, e.birth_date, t.title, d.from_date, d.to_date
+INTO mentorship_eligibilty
+FROM employees as e
+inner join titles as t
+on e.emp_no = t.emp_no
+	inner join dept_emp as d
+		on e.emp_no = d.emp_no
+where e.birth_date between '01-01-1965' and '12-31-1965'
+order by e.emp_no
+
 
